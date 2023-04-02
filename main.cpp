@@ -1,4 +1,4 @@
-#include "fnctn.h"
+#include "tasks_rk1.h"
 
 void task_1() {
     WorkWithFile a("sourceFile_task1.txt");
@@ -56,6 +56,5 @@ int main() {
     task_5();
     task_6_7();
     //task_7();
-    std::cout<<"end";
     return 0;
 }

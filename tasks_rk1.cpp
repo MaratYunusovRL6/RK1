@@ -1,4 +1,4 @@
-#include "fnctn.h"
+#include "tasks_rk1.h"
 //1
 void WorkWithFile:: readFromFile (const char* filename) {
     FILE *res = fopen(filename, "r");

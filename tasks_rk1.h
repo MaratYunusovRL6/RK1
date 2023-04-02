@@ -2,8 +2,8 @@
 // Created by Admin on 27.03.2023.
 //
 
-#ifndef RK1_FNCTN_H
-#define RK1_FNCTN_H
+#ifndef RK1_TASKS_RK1_H
+#define RK1_TASKS_RK1_H
 #include <cstdio>
 #include <cstdlib>
 #include <ctime>
