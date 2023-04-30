@@ -38,19 +38,78 @@ void WorkWithFile::writeStatInfoToFile(const char* outFile){
 //2
 char* convertDecToBin(int number) {
     char* binary = new char[33];
-    int i = 0;
-    while (number > 0) {
-        binary[i++] = number % 2 + '0';
-        number /= 2;
+    if(number>=0){
+        int i = 0;
+        while (number > 0) {
+            binary[i++] = number % 2 + '0';
+            number /= 2;
+        }
+        binary[i] = '\0';
+        int len = strlen(binary);
+        for (int j = 0; j < len / 2; j++) {
+            char temp = binary[j];
+            binary[j] = binary[len - j - 1];
+            binary[len - j - 1] = temp;
+        }
+        char* binary1 = new char[33];
+        int s=-1;
+        for(int i=0;i<=32;i++) {
+            if (i >= 32 - strlen(binary)) {
+                binary1[i] = binary[s=s + 1];
+            }
+            else{
+                binary1[i]='0';
+            }
+        }
+        return binary1;
     }
-    binary[i] = '\0';
-    int len = strlen(binary);
-    for (int j = 0; j < len / 2; j++) {
-        char temp = binary[j];
-        binary[j] = binary[len - j - 1];
-        binary[len - j - 1] = temp;
+    else{
+        number=abs(number);
+        int i = 0;
+        while (number > 0) {
+            binary[i++] = number % 2 + '0';
+            number /= 2;
+        }
+        binary[i] = '\0';
+        int len = strlen(binary);
+        for (int j = 0; j < len / 2; j++) {
+            char temp = binary[j];
+            binary[j] = binary[len - j - 1];
+            binary[len - j - 1] = temp;
+        }
+        char* binary1 = new char[33];
+        int s=-1;
+        for(int i=0;i<=32;i++) {
+            if (i >= 32 - strlen(binary)) {
+                binary1[i] = binary[s=s + 1];
+            }
+            else{
+                binary1[i]='0';
+            }
+        }
+        char* invertbinary=new char[strlen(binary1)+1];
+        for(int i=0;i<strlen(binary1);i++){
+            if (binary1[i]=='0')
+                invertbinary[i]='1';
+            else
+                invertbinary[i]='0';
+        }
+        int r=1;
+        for(int i = strlen(binary1)-1;i>=0;i--){
+            int sum=(invertbinary[i]-'0')+r;
+            if (sum==2){
+                invertbinary[i]='0';
+                r=1;
+            }
+            else{
+                invertbinary[i]=(sum==1)?'1':'0';
+                r=0;
+            }
+
+        }
+        return invertbinary;
     }
-    return binary;
+
 }
 void writeToFile(const char* fileName, const char* strNum) {
     std::ofstream file;

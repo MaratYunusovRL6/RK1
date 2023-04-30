@@ -6,7 +6,7 @@ void task_1() {
 }
 
 void task_2(){
-    int number=89;//входные данные для десятичного числа
+    int number=-89;//входные данные для десятичного числа
     char* binary = convertDecToBin(number);
     writeToFile("result_task2.txt", binary);
     delete[] binary;
