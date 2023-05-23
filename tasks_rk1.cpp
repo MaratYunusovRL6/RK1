@@ -151,10 +151,21 @@ char* convertBinToHex(const char* binNum){
         delete[] tmp;
     }
     hexNum[Index] = '\0';
-    delete[] numP;
+    delete[] numP;//nulptr
     return hexNum;
 }
-
+void writeToFile(const char* fileName, int writeAppend, const char* hexNum, const char* binNum){
+    if(writeAppend==0){
+        FILE* res = fopen(fileName, "w");
+        fprintf(res,"%s\t%s", binNum, hexNum);
+        fclose(res);
+    }
+    else{
+        FILE* res = fopen(fileName, "a");
+        fprintf(res,"\n%s\t%s", binNum, hexNum);
+        fclose(res);
+    }
+}
 //4
 void buildTree(int a){
     std::cout<<std::endl;
@@ -187,9 +198,9 @@ LinkedList::LinkedList() {
 }
 LinkedList::~LinkedList() {
     while(Head != nullptr) {
-        Node *k = Head;
+        Node *q = Head;
         Head = Head->next;
-        delete k;
+        delete q;
     }
 }
 
@@ -214,23 +225,22 @@ void LinkedList::push_back(int nameNode) {
 void LinkedList::writeToFileFromTail() {
     FILE* res = fopen("task6_Tail.txt", "w");
     Node* Cursor = Tail;
-    //fprintf(res, "%i\n", Cursor);//если что удалить
     while (Cursor != nullptr) {
-        fprintf(res, "%i\n", Cursor->nameNode);
+        fprintf(res, "%i;", Cursor->nameNode);
         Cursor = Cursor->prev;
     }
     fclose(res);
 }
 void LinkedList::writeToFileFromHead() {
-    FILE* res = fopen("task6_Head.txt", "w");
-    Node* Cursor = Head;
-    //fprintf(res, "%i\n", Cursor);
+    FILE *res = fopen("task6_Head.txt", "w");
+    Node *Cursor = Head;
     while (Cursor != nullptr) {
-        fprintf(res, "%i\n", Cursor->nameNode);
+        fprintf(res, "%i;", Cursor->nameNode);
         Cursor = Cursor->next;
     }
     fclose(res);
 }
+int Node::countNodes = 0;
 void LinkedList::insert(int nameNode, int position) {
     Node* New = new Node;
     New->nameNode = nameNode;
