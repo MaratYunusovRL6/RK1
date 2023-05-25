@@ -20,7 +20,7 @@ char* NewChar(const char* s);
 
 class WorkWithFile {
 private :
-    char* dataOfFile = new char[20000];
+    char* dataOfFile = new char[2000];
 
     void readFromFile(const char* fileName);
 

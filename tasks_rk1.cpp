@@ -1,11 +1,14 @@
 #include "tasks_rk1.h"
 //1
 void WorkWithFile:: readFromFile (const char* filename) {
-    FILE *res = fopen(filename, "r");
-    if(res) {
-        while (fgets(dataOfFile, 2000, res) != NULL){
-        }
+    FILE *res=fopen(filename,"r");
+    char buf;
+    int k=0;
+    while((fscanf(res,"%c",&buf)!=EOF)){
+        dataOfFile[k]=buf;
+        k++;
     }
+    dataOfFile[k]='\0';
     fclose(res);
 }
 void WorkWithFile::prepareTestFile(const char* filename) {
